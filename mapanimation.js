@@ -1,7 +1,7 @@
-/* The constant 'markers' is an array that holds markers pushed from the 'run' 
+/* The constant 'markerarray' is an array that holds markerarray pushed from the 'run' 
 function. Its length changes depending on how many instances of the 19 bus are
 running at any given time */
-const markers = [];
+/* const markerarray = []; */
 var markerArray = [];
 
 markerArray[0] = new mapboxgl.Marker({
@@ -67,13 +67,13 @@ markerArray[9] = new mapboxgl.Marker({
 async function run(){
 	
     const locations = await getBusLocations();
-    /* The following section of code will push specific busses to 'markers' 
+    /* The following section of code will push specific busses to 'markerarray' 
     based on how many 19 buses are currently on the road, and add as needed
     when more busses come into service.
     Also removes buses as they come out of service
     */
-    if (markers.length !== locations.length) {
-        if (markers.length === 0){
+    if (markerarray.length !== locations.length) {
+        if (markerarray.length === 0){
             for (i=0; i<locations.length; i++){
             let directionClass = ''
             const busLocation = [locations[i].attributes.longitude, locations[i].attributes.latitude];
@@ -94,22 +94,22 @@ async function run(){
             .setLngLat(busLocation)
             .setPopup(new mapboxgl.Popup().setHTML(popUpContents))
             .addTo(map);
-            markers.push(busMarker);
+            markerarray.push(busMarker);
             }
-            console.log("Initiated Buses to markers array");
+            console.log("Initiated Buses to markerarray array");
         }
         // The following removes a marker if a bus goes out of service
-        if (markers.length > locations.length) {
-            let difference = markers.length - locations.length;
+        if (markerarray.length > locations.length) {
+            let difference = markerarray.length - locations.length;
             for (i=1; i<=difference; i++){
-                let indexToRemove = markers.length - 1;
-                markers[indexToRemove].remove();
-                markers.pop();
+                let indexToRemove = markerarray.length - 1;
+                markerarray[indexToRemove].remove();
+                markerarray.pop();
             }
         }
         // The following adds a new marker if a bus comes into service
-        if (markers.length < locations.length) {
-            let difference = locations.length - markers.length;
+        if (markerarray.length < locations.length) {
+            let difference = locations.length - markerarray.length;
             for (i=difference; i>0; i--){
                 let totalBuses = locations.length;
                 const busLocation = [locations[totalBuses - i].attributes.longitude, locations[totalBuses - i].attributes.latitude];
@@ -130,24 +130,24 @@ async function run(){
                 .setLngLat(busLocation)
                 .setPopup(new mapboxgl.Popup().setHTML(popUpContents))
                 .addTo(map);
-                markers.push(busMarker);
+                markerarray.push(busMarker);
             }
         }
     }
-    // Updates bus locations for each bus in 'markers'
+    // Updates bus locations for each bus in 'markerarray'
     for (i=0; i<locations.length; i++) {
         const busLocation = [locations[i].attributes.longitude, locations[i].attributes.latitude];
         const directionID = locations[i].attributes.direction_id;
-        const busMarker = markers[i].getElement();
+        const busMarker = markerarray[i].getElement();
         if (directionID == 0) {
                 busMarker.className = 'marker-outbound mapboxgl-marker mapboxgl-marker-anchor-center'
-                markers[i].setPopup(new mapboxgl.Popup().setHTML("Direction: <br>Outbound to Fields Corner"));
+                markerarray[i].setPopup(new mapboxgl.Popup().setHTML("Direction: <br>Outbound to Fields Corner"));
             } else {
                 busMarker.className = 'marker-inbound mapboxgl-marker mapboxgl-marker-anchor-center'
-                markers[i].setPopup(new mapboxgl.Popup().setHTML("Direction: <br>Inbound to Kenmore"));  
+                markerarray[i].setPopup(new mapboxgl.Popup().setHTML("Direction: <br>Inbound to Kenmore"));  
             }
             
-        markers[i].setLngLat(busLocation)
+        markerarray[i].setLngLat(busLocation)
     }
     
     let runButton = document.getElementById("run-button")
