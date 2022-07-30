@@ -102,8 +102,8 @@ async function run(){
 
 // Request bus data from MBTA
 async function getBusLocations(){
-	const url = 'https://api-v3.mbta.com/vehicles?filter[route]=19&include=trip';
-	const response = await fetch(url);
+	const url = 'https://api-v3.mbta.com/vehicles?api_key=fb094a50f8c546179b4fffe89cf1f481&filter[route]=19&include=trip';
+    const response = await fetch(url);
 	const json     = await response.json();
 	return json.data;
 }
