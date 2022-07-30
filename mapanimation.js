@@ -2,7 +2,68 @@
 function. Its length changes depending on how many instances of the 19 bus are
 running at any given time */
 const markers = [];
+var markerArray = [];
 
+markerArray[0] = new mapboxgl.Marker({
+	color: "#FF0000",//red
+	rotationAlignment: 'map'
+})
+.setLngLat([-71.192761, 42.357575])
+.addTo(map);
+markerArray[1] = new mapboxgl.Marker({
+	color: "#00ff00",//green
+	rotationAlignment: 'map'
+})
+.setLngLat([0, 0])
+.addTo(map);
+markerArray[2] = new mapboxgl.Marker({
+	color: "#0000ff",//blue
+	rotationAlignment: 'map'
+})
+.setLngLat([0,0])
+.addTo(map);
+markerArray[3] = new mapboxgl.Marker({
+	color: "#FF00ff",//prpl
+	rotationAlignment: 'map'
+})
+.setLngLat([0, 0])
+.addTo(map);
+markerArray[4] = new mapboxgl.Marker({
+	color: "#FFFF00",//yellow
+	rotationAlignment: 'map'
+})
+.setLngLat([0, 0])
+.addTo(map);
+markerArray[5] = new mapboxgl.Marker({
+	color: "#00FFFF",//Aqua
+	rotationAlignment: 'map'
+})
+.setLngLat([0, 0])
+.addTo(map);
+markerArray[6] = new mapboxgl.Marker({
+	color: "#FFFFFF",//White
+	rotationAlignment: 'map'
+})
+.setLngLat([0, 0])
+.addTo(map);
+markerArray[7] = new mapboxgl.Marker({
+	color: "#000000",//blak
+	rotationAlignment: 'map'
+})
+.setLngLat([0, 0])
+.addTo(map);
+markerArray[8] = new mapboxgl.Marker({
+	color: "#552500",//brown
+	rotationAlignment: 'map'
+})
+.setLngLat([0, 0])
+.addTo(map);
+markerArray[9] = new mapboxgl.Marker({
+	color: "#450080",//prpl
+	rotationAlignment: 'map'
+})
+.setLngLat([0, 0])
+.addTo(map);
 async function run(){
 	
     const locations = await getBusLocations();
