@@ -74,7 +74,7 @@
         zoom: 13.15
          // Add zoom and rotation controls to the map.
          });
-    map.addControl(new mapboxgl.NavigationControl());
+    map.addControl(new mapboxgl.NavigationControl,bottom-right());
     map.on('load', () => {
     map.addSource('route', {
         'type': 'geojson',
