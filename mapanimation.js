@@ -1,47 +1,109 @@
-// This array contains the coordinates for all bus stops between MIT and Harvard
-const busStops = [
-  [-71.093729, 42.359244],
-  [-71.094915, 42.360175],
-  [-71.0958, 42.360698],
-  [-71.099558, 42.362953],
-  [-71.103476, 42.365248],
-  [-71.106067, 42.366806],
-  [-71.108717, 42.368355],
-  [-71.110799, 42.369192],
-  [-71.113095, 42.370218],
-  [-71.115476, 42.372085],
-  [-71.117585, 42.373016],
-  [-71.118625, 42.374863],
-];
+/* The constant 'markers' is an array that holds markers pushed from the 'run' 
+function. Its length changes depending on how many instances of the 19 bus are
+running at any given time */
+const markers = [];
 
-// TODO: add your own access token
-mapboxgl.accessToken = 'pk.eyJ1IjoiZmFzdGNhcjM3OSIsImEiOiJjbDRhcWMxMTkxZWdmM2RuczRzeTN3N3hmIn0.shkKofXCG2z0Ne_k3_Ez3A';
-
-// This is the map instance
-let map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/mapbox/streets-v11',
-  center: [-71.104081, 42.365554],
-  zoom: 14,
-});
-
-// TODO: add a marker to the map at the first coordinates in the array busStops. The marker variable should be named "marker"
- let marker = new mapboxgl.Marker().setLngLat([-71.091542, 42.358862]).addTo(map);
-// counter here represents the index of the current bus stop
-let counter = 0;
-function move() {
-  // TODO: move the marker on the map every 1000ms. Use the function marker.setLngLat() to update the marker coordinates
-  // Use counter to access bus stops in the array busStops
-  // Make sure you call move() after you increment the counter.
+async function run(){
+	
+    const locations = await getBusLocations();
+    /* The following section of code will push specific busses to 'markers' 
+    based on how many 19 buses are currently on the road, and add as needed
+    when more busses come into service.
+    Also removes buses as they come out of service
+    */
+    if (markers.length !== locations.length) {
+        if (markers.length === 0){
+            for (i=0; i<locations.length; i++){
+            let directionClass = ''
+            const busLocation = [locations[i].attributes.longitude, locations[i].attributes.latitude];
+            const directionID = locations[i].attributes.direction_id;
+            if (directionID == 1) {
+                var direction = "Inbound to Kenmore";
+                directionClass = 'marker-inbound'
+            } else {
+                var direction = "Outbound to Fields Corner"
+                directionClass = 'marker-outbound'
+            };
+            const popUpContents = "Direction: " + "<br>" + direction;
+            // create a div to hold the marker image
+            const el = document.createElement('div');
+            el.className = directionClass;
+            // create the marker
+            let busMarker = new mapboxgl.Marker(el)
+            .setLngLat(busLocation)
+            .setPopup(new mapboxgl.Popup().setHTML(popUpContents))
+            .addTo(map);
+            markers.push(busMarker);
+            }
+            console.log("Initiated Buses to markers array");
+        }
+        // The following removes a marker if a bus goes out of service
+        if (markers.length > locations.length) {
+            let difference = markers.length - locations.length;
+            for (i=1; i<=difference; i++){
+                let indexToRemove = markers.length - 1;
+                markers[indexToRemove].remove();
+                markers.pop();
+            }
+        }
+        // The following adds a new marker if a bus comes into service
+        if (markers.length < locations.length) {
+            let difference = locations.length - markers.length;
+            for (i=difference; i>0; i--){
+                let totalBuses = locations.length;
+                const busLocation = [locations[totalBuses - i].attributes.longitude, locations[totalBuses - i].attributes.latitude];
+                const directionID = locations[i].attributes.direction_id;
+            if (directionID == 1) {
+                var direction = "Inbound to Kenmore";
+                directionClass = 'marker-inbound'
+            } else {
+                var direction = "Outbound to Fields Corner"
+                directionClass = 'marker-outbound'
+            };
+            const popUpContents = "Direction: " + "<br>" + direction;
+                // create a div to hold the marker image
+                const el = document.createElement('div');
+                el.className = directionClass;
+                // create the marker
+                let busMarker = new mapboxgl.Marker(el)
+                .setLngLat(busLocation)
+                .setPopup(new mapboxgl.Popup().setHTML(popUpContents))
+                .addTo(map);
+                markers.push(busMarker);
+            }
+        }
+    }
+    // Updates bus locations for each bus in 'markers'
+    for (i=0; i<locations.length; i++) {
+        const busLocation = [locations[i].attributes.longitude, locations[i].attributes.latitude];
+        const directionID = locations[i].attributes.direction_id;
+        const busMarker = markers[i].getElement();
+        if (directionID == 0) {
+                busMarker.className = 'marker-outbound mapboxgl-marker mapboxgl-marker-anchor-center'
+                markers[i].setPopup(new mapboxgl.Popup().setHTML("Direction: <br>Outbound to Fields Corner"));
+            } else {
+                busMarker.className = 'marker-inbound mapboxgl-marker mapboxgl-marker-anchor-center'
+                markers[i].setPopup(new mapboxgl.Popup().setHTML("Direction: <br>Inbound to Kenmore"));  
+            }
+            
+        markers[i].setLngLat(busLocation)
+    }
+    
+    let runButton = document.getElementById("run-button")
+    runButton.style.visibility = "hidden";
+    let inServiceDiv = document.getElementById("in-service");
+    inServiceDiv.style.visibility = "visible";
+    inServiceDiv.style.marginTop = (window.innerHeight - 70) + "px";
+    inServiceDiv.textContent = "Buses in Service: " + locations.length;
+    
+	// timer
+	setTimeout(run, 15000);
 }
-setTimeout(() => {
-    if (counter >= busStops.length) return;
-    marker.setLngLat(busStops[counter]);
-    counter++;
-    move();
-  }, 1000);
-}
-// Do not edit code past this point
-if (typeof module !== 'undefined') {
-  module.exports = { move };
+
+// Request bus data from MBTA
+async function getBusLocations(){
+	const url = 'https://api-v3.mbta.com/vehicles?filter[route]=19&include=trip';
+	const response = await fetch(url);
+	const json     = await response.json();
+	return json.data;
 }

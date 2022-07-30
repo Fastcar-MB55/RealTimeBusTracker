@@ -1,16 +1,36 @@
-body {
-  margin: 0;
-  padding: 0;
-}
-#map {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100%;
+body { margin: 0; padding: 0; }
+button {
+    font-size: 2em;
+    background-color: #f8eed1;
+    border-radius: 15px;
+    opacity: .65;
 }
 
-.map-overlay {
-  position: absolute;
-  left: 0;
-  padding: 10px;
+#in-service {
+    
+    background-color: #f8eed1;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    border-style: solid;
+    border-width: 2px;
+    opacity: .65;
+    
 }
+.marker-inbound {
+    background-image: url('bus-inbound.png');
+    background-size: cover;
+    background-color: transparent;
+    width: 31px;
+    height: 40px;
+    cursor: pointer;
+  }
+
+.marker-outbound {
+    background-image: url('bus-outbound.png');
+    background-size: cover;
+    background-color: transparent;
+    width: 31px;
+    height: 40px;
+    cursor: pointer;
+  }
