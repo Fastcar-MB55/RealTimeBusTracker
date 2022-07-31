@@ -23,7 +23,7 @@ async function run(){
                 var direction = "Inbound to Harvard";
                 directionClass = 'marker-inbound'
             } else {
-                var direction = "Outbound to Arlington Heights"
+                var direction = "Outbound to Nubian"
                 directionClass = 'marker-outbound'
             };
             const popUpContents = "Direction: " + "<br>" + direction;
@@ -59,7 +59,7 @@ async function run(){
                 var direction = "Inbound to Harvard";
                 directionClass = 'marker-inbound'
             } else {
-                var direction = "Outbound to Arlington Heights"
+                var direction = "Outbound to Nubian"
                 directionClass = 'marker-outbound'
             };
             const popUpContents = "Direction: " + "<br>" + direction;
@@ -82,7 +82,7 @@ async function run(){
         const busMarker = markers[i].getElement();
         if (directionID == 0) {
                 busMarker.className = 'marker-outbound mapboxgl-marker mapboxgl-marker-anchor-center'
-                markers[i].setPopup(new mapboxgl.Popup().setHTML("Direction: <br>Outbound to Arlington Heights"));
+                markers[i].setPopup(new mapboxgl.Popup().setHTML("Direction: <br>Outbound to Nubian"));
             } else {
                 busMarker.className = 'marker-inbound mapboxgl-marker mapboxgl-marker-anchor-center'
                 markers[i].setPopup(new mapboxgl.Popup().setHTML("Direction: <br>Inbound to Harvard"));  
