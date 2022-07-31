@@ -18,7 +18,7 @@ button {
     
 }
 .marker-inbound {
-    background-image: url('bus-inbound.png');
+    background-image: url('mapbox-marker-icon-20px-blue.png');
     background-size: cover;
     background-color: transparent;
     width: 31px;
@@ -27,7 +27,7 @@ button {
   }
 
 .marker-outbound {
-    background-image: url('bus-outbound.png');
+    background-image: url('mapbox-marker-icon-20px-green.png');
     background-size: cover;
     background-color: transparent;
     width: 31px;
