@@ -1,6 +1,6 @@
-const markers = [];
-
 mapboxgl.accessToken = 'pk.eyJ1IjoiZmFzdGNhcjM3OSIsImEiOiJjbDRicWt2bzIxb3QyM2ptcjMyMGZtYXJnIn0._qQJzHsStmQ5a36lPcQZ7g'
+
+const markers = [];
 
 const map = new mapboxgl.Map({
     container: "map",
@@ -28,11 +28,11 @@ async function getBusLocations(){
         .setLngLat([bus.attributes.longitude, bus.attributes.latitude])
         .setHTML(`Route ${bus.relationships.route.data.id}, Bus ${bus.attributes.label}`);
       
-        const marker = new mapboxgl.Marker()
+        const markers = new mapboxgl.Markers()
         .setLngLat([bus.attributes.longitude, bus.attributes.latitude])
         .setPopup(popup)
         .addTo(map);
-      setTimeout(() => {marker.remove()}, 14999);
+      setTimeout(() => {markers.remove()}, 14999);
     });
   }
   

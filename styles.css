@@ -7,23 +7,23 @@ body {
 
 h2 {
   margin: 15px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Nunito, Tahoma, sans-serif;
 }
 
 p {
   margin: 15px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Nunito, Tahoma, sans-serif;
 }
 
-.top {
+.top-map {
   display: flex;
   flex-direction: column;
-  justify-items: center;
+  justify-items: left;
 }
 #map {
 position: absolute;
-top: 120px;
-bottom: 0;
+top: 60px;
+bottom: 20px;
 width: 100%;
 }
 
@@ -33,14 +33,10 @@ left: 0;
 padding: 10px;
 }
 
-.input {
-  justify-self: right;
-  margin-left: 15px;
-  margin-top: 15px;
-}
 .button {
-      z-index: 10 ;
+      
       background-color: #1c87c9;
+      background-size: cover;
       border: none;
       color: white;
       padding: 20px 34px;
@@ -50,6 +46,7 @@ padding: 10px;
       font-size: 20px;
       margin: 4px 2px;
       cursor: pointer;
+      z-index: 10 ;
     }
 
 .in-service {
