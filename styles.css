@@ -1,7 +1,8 @@
 body { margin: 0; padding: 0; }
 
-    
+.map-overlay top   
 .button {
+      z-index: 10 ;
       background-color: #1c87c9;
       border: none;
       color: white;
@@ -14,7 +15,7 @@ body { margin: 0; padding: 0; }
       cursor: pointer;
     }
 
-#in-service {
+.in-service {
     
     background-color: #f8eed1;
     border-radius: 15px;
