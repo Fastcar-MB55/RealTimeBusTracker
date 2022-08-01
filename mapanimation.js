@@ -42,5 +42,5 @@ async function getBusLocations(){
         addLocations();
         run();
       }, 15000)};
-}
+
 
