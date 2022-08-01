@@ -27,13 +27,14 @@
           <!-- Following Div is a container to hold map overlays and navbar -->
           <div class="map-overlay top" style="justify-items: center; min-width: 100%;">
           <!-- Navigation Bar -->
-          <div style="min-width: 100%;">
-            
-            
-            <button onclick="run()" class="button"id="run-button">
-            See Route 1 Bus Locations
-          </button>
+          <script> <div style="min-width: 100%;">>
+            <button onclick="myFunction()"type="submit" class="button">Run Bus Tracker!</button>
+          <p id="RTmap"></p>
+          
+      function myFunction() {
+        document.getElementById("RTmap").innerHTML = run() }
         </div>
+      </script> 
       <div class="map-overlay bottom" id="in-service" style="visibility: hidden" style="background-color: e6ddc2;">
       </div>
     </div>
