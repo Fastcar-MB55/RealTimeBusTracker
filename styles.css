@@ -20,63 +20,40 @@ p {
   flex-direction: column;
   justify-items: left;
 }
+
 #map {
 position: absolute;
-top: 60px;
+top: 10px;
 bottom: 20px;
 width: 100%;
+}
+
+button {
+  font-size: 1.25em;
+  background-color: red;
+  color: white;
+  background-size: cover;
+  border-radius: 15px;
+  opacity: .65;
+}
+
+button:hover {
+  background-color: white;
+  color: black;
+  background-size: cover;
+  border-radius: 15px;
+  opacity: .65;
 }
 
 .map-overlay {
 position: absolute;
 left: 0;
 padding: 10px;
+
 }
 
-.button {
-      
-      background-color: #1c87c9;
-      background-size: cover;
-      border: none;
-      color: white;
-      padding: 20px 34px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 20px;
-      margin: 4px 2px;
-      cursor: pointer;
-      z-index: 10 ;
-    }
-    
-    .btn-group button {
-      background-color: #0423aa; 
-      background-size: cover;
-      border: 1px solid #0423aa; 
-      color: white; 
-      padding: 20px 34px; 
-      text-align: center;
-      cursor: pointer; 
-      float: left; /* Float the buttons side by side */
-    }
-    
-    /* Clear floats  */
-    .btn-group:after {
-      content: "";
-      clear: both;
-      display: table;
-    }
-    
-    .btn-group button:not(:last-child) {
-      border-right: none; /* Prevent double borders */
-    }
-    
-    /* Add a background color on hover */
-    .btn-group button:hover {
-      background-color: #49afd1;
-      color: black
-    }
-        
+/* Add a background color on hover */
+
 .in-service {
     
     background-color: #f8eed1;
