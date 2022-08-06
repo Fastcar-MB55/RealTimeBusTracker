@@ -132,7 +132,8 @@ async function run(){
 	const locations = await getBusLocations();
 
 		locations.forEach((vehicle, i) =>{
-		console.log(locations[i].attributes.latitude);
+		// console.log(locations[i].attributes.latitude);
+		
 		let coordinates = [locations[i].attributes.longitude, locations[i].attributes.latitude];
 		markers[i].setLngLat(coordinates);
 		markers[i].setRotation(locations[i].attributes.bearing+45);
@@ -148,5 +149,6 @@ async function getBusLocations(){
 	const response = await fetch(url);
 	const json     = await response.json();
 	return json.data;
+	console.log(json.data)
 }
 
