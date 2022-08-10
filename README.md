@@ -10,45 +10,45 @@
 
 ### Roadmap of future improvements: 
 ##### Instead of hard coding the bus number into the MBTA API, I'd like to add a validated input field to select the bus number. Also, I would like to add a popup for each buses icon and add attributes about the bus that are available in the API. See a part of the schema below.
-{
-        "attributes": {
-            "bearing": 0,
-            "current_status": "IN_TRANSIT_TO",
-            "current_stop_sequence": 57,
-            "direction_id": 0,
-            "label": "1438",
-            "latitude": 42.50245678,
-            "longitude": -70.85587941,
-            "occupancy_status": "MANY_SEATS_AVAILABLE",
-            "speed": null,
-            "updated_at": "2022-08-06T15:36:27-04:00"
-        },
-        "id": "y1438",
-        "links": {
-            "self": "/vehicles/y1438"
-        },
-        "relationships": {
-            "route": {
-                "data": {
-                    "id": "441",
-                    "type": "route"
-                }
-            },
-            "stop": {
-                "data": {
-                    "id": "4801",
-                    "type": "stop"
-                }
-            },
-            "trip": {
-                "data": {
-                    "id": "52043110",
-                    "type": "trip"
-                }
-            }
-        },
-        "type": "vehicle"
-    },
+
+######        "attributes": {
+######            "bearing": 0,
+######            "current_status": "IN_TRANSIT_TO",
+######            "current_stop_sequence": 57,
+######            "direction_id": 0,
+######            "label": "1438",
+######            "latitude": 42.50245678,
+######            "longitude": -70.85587941,
+######            "occupancy_status": "MANY_SEATS_AVAILABLE",
+######            "speed": null,
+######            "updated_at": "2022-08-06T15:36:27-04:00"
+######        },
+######        "id": "y1438",
+######        "links": {
+######            "self": "/vehicles/y1438"
+######        },
+######        "relationships": {
+######            "route": {
+######                "data": {
+######                    "id": "441",
+######                    "type": "route"
+######                }
+######            },
+######            "stop": {
+######                "data": {
+######                    "id": "4801",
+######                    "type": "stop"
+######                }
+######            },
+######            "trip": {
+######                "data": {
+######                    "id": "52043110",
+######                    "type": "trip"
+######                }
+######            }
+######        },
+######        "type": "vehicle"
+######    },
 
 #####
 #####
